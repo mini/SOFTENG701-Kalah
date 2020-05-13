@@ -3,22 +3,27 @@ package kalah.ui;
 import com.qualitascorpus.testsupport.IO;
 
 import kalah.game.model.Board;
-import kalah.ui.format.ConsoleFormat;
+import kalah.ui.format.ConsoleStrings;
 
 public class QualitasIOUserInterface implements UserInterface {
 
 	private static final String QUIT_GAME_TOKEN = "q";
 	private IO io;
-	private ConsoleFormat cf;
+	private ConsoleStrings cf;
 
-	public QualitasIOUserInterface(IO io, ConsoleFormat cf) {
+	public QualitasIOUserInterface(IO io, ConsoleStrings cf) {
 		this.io = io;
 		this.cf = cf;
 	}
 
 	@Override
+	public boolean boardCompatibilityCheck(Board board) {
+		return board.getNumPlayers() == 2;
+	}
+
+	@Override
 	public void renderBoard(Board board) {
-		for(String line: cf.getBoardRepresentation(board)) {
+		for (String line : cf.getBoardRepresentation(board)) {
 			io.println(line);
 		}
 	}
@@ -32,7 +37,7 @@ public class QualitasIOUserInterface implements UserInterface {
 	public void onEmptyHouse() {
 		io.println(cf.getEmptyHouseMsg());
 	}
-	
+
 	@Override
 	public void onQuit(Board board) {
 		io.println(cf.getGameOverMsg());

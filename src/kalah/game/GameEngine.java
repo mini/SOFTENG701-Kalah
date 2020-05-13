@@ -1,6 +1,7 @@
 package kalah.game;
 
 import kalah.exception.EmptyHouseKalahException;
+import kalah.exception.IncompatibleBoardKalahException;
 import kalah.game.model.Board;
 import kalah.game.rule.RuleSet;
 import kalah.ui.UserInterface;
@@ -16,6 +17,12 @@ public class GameEngine {
 	}
 
 	public void runGameLoop(Board board) {
+		if(!ruleset.boardCompatibilityCheck(board)) {
+			throw new IncompatibleBoardKalahException("RuleSet is not compatible with current board");
+		} else if(!ui.boardCompatibilityCheck(board)) {
+			throw new IncompatibleBoardKalahException("UI is not compatible with current board");
+		}
+		
 		int currentPlayer = ruleset.getFirstPlayer();
 		boolean endedNaturally = true;
 		while (!ruleset.checkGameOver(board, currentPlayer)) {

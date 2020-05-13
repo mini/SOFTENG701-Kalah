@@ -12,6 +12,11 @@ public class StandardKalahRuleSet implements RuleSet {
 	private static final int PLAYER2 = 2;
 
 	@Override
+	public boolean boardCompatibilityCheck(Board board) {
+		return board.getNumPlayers() == 2;
+	}
+
+	@Override
 	public int getFirstPlayer() {
 		return PLAYER1;
 	}
