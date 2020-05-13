@@ -2,7 +2,21 @@ package kalah.ui.format.theme;
 
 import kalah.util.StringUtils;
 
-public class SE701A3ConsoleGridTheme implements ConsoleGridTheme {
+public class SE701A3GridTheme implements GridTheme {
+	@Override
+	public int getStoreCellWidth() {
+		return 4;
+	}
+
+	@Override
+	public int getHouseCellWidth() {
+		return 7;
+	}
+
+	@Override
+	public String getSpacer() {
+		return " ";
+	}
 
 	@Override
 	public String getVBorder() {
@@ -20,7 +34,7 @@ public class SE701A3ConsoleGridTheme implements ConsoleGridTheme {
 	}
 
 	@Override
-	public String getHouseCell(int houseNum, int numSeeds) {
+	public String getHouseCellContent(int houseNum, int numSeeds) {
 		return houseNum + "[" + getSeedCount(numSeeds) + "]";
 	}
 

@@ -7,28 +7,27 @@ public class Board {
 
 	private int numPlayers;
 	private int housesPerPlayer;
-	private List<List<Store>> playersContainers = new ArrayList<>();
-	private List<Store> gameBoard = new ArrayList<>();
+	private int pitsPerPlayer;
+	private List<List<Pit>> playersPits = new ArrayList<>();
 
 	public Board(int numPlayers, int housesPerPlayer, int initialSeeds) {
 		this.numPlayers = numPlayers;
 		this.housesPerPlayer = housesPerPlayer;
+		this.pitsPerPlayer = housesPerPlayer + 1;
 
-		for (int i = 0; i < numPlayers; i++) {
-			List<Store> playerContianers = new ArrayList<>();
-			for (int j = 0; j < housesPerPlayer; j++) {
-				playerContianers.add(new House(initialSeeds));
+		for (int i = 1; i <= numPlayers; i++) {
+			List<Pit> playerPits = new ArrayList<>();
+			for (int j = 1; j <= housesPerPlayer; j++) {
+				playerPits.add(new House(i, initialSeeds, j));
 			}
-			playerContianers.add(new Store());
-			playersContainers.add(playerContianers);
-			gameBoard.addAll(playerContianers);
+			playerPits.add(new Store(i, pitsPerPlayer));
+			playersPits.add(playerPits);
 		}
-
 	}
 
 	public int getPlayerScore(int playerNum) {
 		int sum = 0;
-		for (Store pit : playersContainers.get(playerNum - 1)) {
+		for (Pit pit : playersPits.get(playerNum - 1)) {
 			sum += pit.getNumSeeds();
 		}
 		return sum;
@@ -38,9 +37,9 @@ public class Board {
 		int bestScore = 0;
 		int bestPlayer = 0;
 		boolean tieExists = false;
-		for(int i = 1; i <= numPlayers; i++) {
+		for (int i = 1; i <= numPlayers; i++) {
 			int score = getPlayerScore(i);
-			if(score > bestScore) {
+			if (score > bestScore) {
 				bestScore = score;
 				bestPlayer = i;
 				tieExists = false;
@@ -48,8 +47,8 @@ public class Board {
 				tieExists = true;
 			}
 		}
-		
-		if(tieExists) {
+
+		if (tieExists) {
 			return 0;
 		} else {
 			return bestPlayer;
@@ -65,11 +64,36 @@ public class Board {
 	}
 
 	public Store getPlayerStore(int playerNum) {
-		return playersContainers.get(playerNum - 1).get(housesPerPlayer + 1);
+		return (Store) playersPits.get(playerNum - 1).get(housesPerPlayer);
 	}
 
-	public List<Store> getPlayerContainers(int playerNum) {
-		return playersContainers.get(playerNum - 1);
+	public House getPlayerHouse(int playerNum, int houseIndex) {
+		if (houseIndex > housesPerPlayer) {
+			return null;
+		}
+		return (House) playersPits.get(playerNum - 1).get(houseIndex - 1);
 	}
 
+	public List<Pit> getPlayerPits(int playerNum) {
+		List<Pit> output = new ArrayList<>();
+		for (Pit pit : playersPits.get(playerNum - 1)) {
+			output.add(pit);
+		}
+		return output;
+	}
+
+	public Pit getNextPit(Pit current) {
+		int nextOwner = current.getOwner();
+		int nextIndex = current.getIndex();
+		if (nextIndex == pitsPerPlayer) {
+			nextOwner++;
+			nextOwner = nextOwner > numPlayers ? 1 : nextOwner;
+			nextIndex = 1;
+		} else {
+			nextIndex++;
+			nextIndex = nextIndex > pitsPerPlayer ? 1 : nextIndex;
+		}
+
+		return playersPits.get(nextOwner - 1).get(nextIndex - 1);
+	}
 }

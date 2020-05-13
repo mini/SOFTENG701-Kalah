@@ -25,7 +25,7 @@ public class QualitasIOUserInterface implements UserInterface {
 
 	@Override
 	public int getInput(Board board, int playerNum) {
-		return io.readInteger(cf.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), -1, QUIT_GAME_TOKEN);
+		return io.readInteger(cf.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), 0, QUIT_GAME_TOKEN);
 	}
 
 	@Override
@@ -41,6 +41,7 @@ public class QualitasIOUserInterface implements UserInterface {
 
 	@Override
 	public void onGameOver(Board board) {
+		renderBoard(board);
 		onQuit(board);
 		for (int i = 1; i <= board.getNumPlayers(); i++) {
 			io.println(cf.getScoreMsg(i, board.getPlayerScore(i)));

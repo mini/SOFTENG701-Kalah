@@ -1,13 +1,8 @@
 package kalah.game.model;
 
-public class Store {
-	protected int numSeeds = 0;
+public class Store extends Pit {
 
-	public void sowSeed() {
-		numSeeds++;
-	}
-
-	public int getNumSeeds() {
-		return numSeeds;
+	public Store(int ownerNum, int index) {
+		super(ownerNum, index);
 	}
 }
