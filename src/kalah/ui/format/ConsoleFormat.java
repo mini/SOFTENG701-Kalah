@@ -3,7 +3,7 @@ package kalah.ui.format;
 import kalah.game.model.Board;
 
 public interface ConsoleFormat {
-	public String getBoardString(Board board);
+	public String[] getBoardRepresentation(Board board);
 
 	public String getPlayerInputPrompt(int playerNum, String cancelToken);
 

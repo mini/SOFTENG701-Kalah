@@ -1,7 +1,6 @@
 package kalah.ui;
 
 import kalah.game.model.Board;
-import kalah.util.KalahGameException;
 
 public interface UserInterface {
 
@@ -9,7 +8,7 @@ public interface UserInterface {
 
 	public int getInput(Board board, int playerNum);
 
-	 public void onGameError(KalahGameException e);
+	public void onEmptyHouse();
 
 	public void onQuit(Board board);
 

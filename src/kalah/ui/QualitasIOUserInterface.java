@@ -4,7 +4,6 @@ import com.qualitascorpus.testsupport.IO;
 
 import kalah.game.model.Board;
 import kalah.ui.format.ConsoleFormat;
-import kalah.util.KalahGameException;
 
 public class QualitasIOUserInterface implements UserInterface {
 
@@ -19,8 +18,7 @@ public class QualitasIOUserInterface implements UserInterface {
 
 	@Override
 	public void renderBoard(Board board) {
-		String[] lines = cf.getBoardString(board).split("\n");
-		for(String line: lines) {
+		for(String line: cf.getBoardRepresentation(board)) {
 			io.println(line);
 		}
 	}
@@ -31,9 +29,8 @@ public class QualitasIOUserInterface implements UserInterface {
 	}
 
 	@Override
-	public void onGameError(KalahGameException e) {
-		// TODO Auto-generated method stub
-		
+	public void onEmptyHouse() {
+		io.println(cf.getEmptyHouseMsg());
 	}
 	
 	@Override
@@ -49,7 +46,7 @@ public class QualitasIOUserInterface implements UserInterface {
 			io.println(cf.getScoreMsg(i, board.getPlayerScore(i)));
 		}
 
-		int winner = board.getWinner();
+		int winner = board.getCurrentFirstPlace();
 		if (winner == 0) {
 			io.println(cf.getTieMsg());
 		} else {

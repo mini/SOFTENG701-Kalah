@@ -25,7 +25,7 @@ public class SE701A3ConsoleGridTheme implements ConsoleGridTheme {
 	}
 
 	@Override
-	public String getPlayer(int playerNum) {
+	public String getPlayerLabel(int playerNum) {
 		return "P" + playerNum;
 	}
 

@@ -3,7 +3,7 @@ package kalah.game.model;
 public class Store {
 	protected int numSeeds = 0;
 
-	public void incrementSeeds() {
+	public void sowSeed() {
 		numSeeds++;
 	}
 

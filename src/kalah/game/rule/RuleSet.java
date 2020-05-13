@@ -1,5 +1,9 @@
 package kalah.game.rule;
 
-public interface RuleSet {
+import kalah.game.model.Board;
 
+public interface RuleSet {
+	public int processTurn(Board board, int playerNum, int selectedHouse);
+
+	public boolean checkGameOver(Board board);
 }

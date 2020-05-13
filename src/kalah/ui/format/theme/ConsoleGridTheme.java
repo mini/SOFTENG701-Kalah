@@ -10,7 +10,7 @@ public interface ConsoleGridTheme {
 
 	public String getHouseCell(int houseNum, int numSeeds);
 
-	public String getPlayer(int playerNum);
+	public String getPlayerLabel(int playerNum);
 
 	public String getSeedCount(int numSeeds);
 }
