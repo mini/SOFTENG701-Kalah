@@ -7,6 +7,7 @@ import kalah.game.rule.RuleSet;
 import kalah.ui.UserInterface;
 
 public class GameEngine {
+	public static final int QUIT_VALUE = 0;
 
 	private RuleSet ruleset;
 	private UserInterface ui;
@@ -29,7 +30,7 @@ public class GameEngine {
 			try {
 				ui.renderBoard(board);
 				int response = ui.getInput(board, currentPlayer);
-				if (response == 0) {
+				if (response == QUIT_VALUE) {
 					endedNaturally = false;
 					break;
 				}

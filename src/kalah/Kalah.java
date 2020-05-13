@@ -8,7 +8,7 @@ import kalah.game.model.Board;
 import kalah.game.rule.RuleSet;
 import kalah.game.rule.StandardKalahRuleSet;
 import kalah.ui.QualitasIOUserInterface;
-import kalah.ui.format.SE701A3ConsoleStrings;
+import kalah.ui.format.SE701A3ConsoleRenderer;
 import kalah.ui.format.theme.SE701A3GridTheme;
 
 /**
@@ -22,7 +22,7 @@ public class Kalah {
 
 	public void play(IO io) {
 		Board board = new Board(2, 6, 4);
-		QualitasIOUserInterface ui = new QualitasIOUserInterface(io, new SE701A3ConsoleStrings(new SE701A3GridTheme()));
+		QualitasIOUserInterface ui = new QualitasIOUserInterface(io, new SE701A3ConsoleRenderer(new SE701A3GridTheme()));
 		RuleSet rs = new StandardKalahRuleSet();
 		new GameEngine(rs, ui).runGameLoop(board);
 	}

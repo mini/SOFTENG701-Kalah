@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+	public static final int NO_WINNER = 0;
 
 	private int numPlayers;
 	private int housesPerPlayer;
@@ -49,7 +50,7 @@ public class Board {
 		}
 
 		if (tieExists) {
-			return 0;
+			return NO_WINNER;
 		} else {
 			return bestPlayer;
 		}

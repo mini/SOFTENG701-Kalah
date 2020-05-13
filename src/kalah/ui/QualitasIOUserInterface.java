@@ -2,23 +2,25 @@ package kalah.ui;
 
 import com.qualitascorpus.testsupport.IO;
 
+import kalah.game.GameEngine;
 import kalah.game.model.Board;
-import kalah.ui.format.ConsoleStrings;
+import kalah.ui.format.ConsoleRenderer;
 
 public class QualitasIOUserInterface implements UserInterface {
-
 	private static final String QUIT_GAME_TOKEN = "q";
-	private IO io;
-	private ConsoleStrings cf;
+	private static final int REQUIRED_PLAYERS = 2;
 
-	public QualitasIOUserInterface(IO io, ConsoleStrings cf) {
+	private IO io;
+	private ConsoleRenderer cf;
+
+	public QualitasIOUserInterface(IO io, ConsoleRenderer cf) {
 		this.io = io;
 		this.cf = cf;
 	}
 
 	@Override
 	public boolean boardCompatibilityCheck(Board board) {
-		return board.getNumPlayers() == 2;
+		return board.getNumPlayers() == REQUIRED_PLAYERS;
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class QualitasIOUserInterface implements UserInterface {
 
 	@Override
 	public int getInput(Board board, int playerNum) {
-		return io.readInteger(cf.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), 0, QUIT_GAME_TOKEN);
+		return io.readInteger(cf.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), GameEngine.QUIT_VALUE, QUIT_GAME_TOKEN);
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class QualitasIOUserInterface implements UserInterface {
 		}
 
 		int winner = board.getCurrentFirstPlace();
-		if (winner == 0) {
+		if (winner == Board.NO_WINNER) {
 			io.println(cf.getTieMsg());
 		} else {
 			io.println(cf.getWinMsg(winner));

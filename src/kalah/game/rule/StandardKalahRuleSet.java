@@ -10,10 +10,10 @@ public class StandardKalahRuleSet implements RuleSet {
 
 	private static final int PLAYER1 = 1;
 	private static final int PLAYER2 = 2;
-
+	private static final int REQUIRED_PLAYERS = 2;
 	@Override
 	public boolean boardCompatibilityCheck(Board board) {
-		return board.getNumPlayers() == 2;
+		return board.getNumPlayers() == REQUIRED_PLAYERS;
 	}
 
 	@Override

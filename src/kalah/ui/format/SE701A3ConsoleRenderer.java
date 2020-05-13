@@ -4,13 +4,13 @@ import kalah.game.model.Board;
 import kalah.ui.format.theme.GridTheme;
 import kalah.util.StringUtils;
 
-public class SE701A3ConsoleStrings implements ConsoleStrings {
+public class SE701A3ConsoleRenderer implements ConsoleRenderer {
 	private static final int PLAYER1 = 1;
 	private static final int PLAYER2 = 2;
 
 	private GridTheme theme;
 
-	public SE701A3ConsoleStrings(GridTheme theme) {
+	public SE701A3ConsoleRenderer(GridTheme theme) {
 		this.theme = theme;
 	}
 
