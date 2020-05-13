@@ -10,6 +10,9 @@ public class StringUtils {
 	}
 	
 	// Sourced from https://stackoverflow.com/questions/8154366/how-to-center-a-string-using-string-format
+	/**
+	 *	Centers a string within the size limit. Biased towards the right side for odd lengths. 
+	 */
 	public static String center(String s, int size, String pad) {
         if (s == null || size <= s.length())
             return s;

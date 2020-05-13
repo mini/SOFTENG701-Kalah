@@ -7,6 +7,10 @@ public class House extends Pit {
 		numSeeds = startingSeeds;
 	}
 
+	/**
+	 * Removes all seeds from the House
+	 * @return how many seeds there were
+	 */
 	public int takeAllSeeds() {
 		int seeds = numSeeds;
 		numSeeds = 0;

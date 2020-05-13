@@ -4,6 +4,9 @@ import kalah.game.model.Board;
 
 public interface UserInterface {
 
+	/**
+	 * Return true if the board can be fully interacted with by this user interface implementation. 
+	 */
 	public boolean boardCompatibilityCheck(Board board);
 
 	public void renderBoard(Board board);

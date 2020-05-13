@@ -26,6 +26,11 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Gets a player's score
+	 * @param playerNum (1 indexed)
+	 * @return the player's score
+	 */
 	public int getPlayerScore(int playerNum) {
 		int sum = 0;
 		for (Pit pit : playersPits.get(playerNum - 1)) {
@@ -34,6 +39,10 @@ public class Board {
 		return sum;
 	}
 
+	/**
+	 * Finds the highest scoring player. If there a tie then {@link Board#NO_WINNER} is returned
+	 * @return the best play's id
+	 */
 	public int getCurrentFirstPlace() {
 		int bestScore = 0;
 		int bestPlayer = 0;
@@ -83,6 +92,9 @@ public class Board {
 		return output;
 	}
 
+	/**
+	 * Gets the next pit. The ordering goes from H1P1, ..., HnP1, H1P2, ..., HnP2, 
+	 */
 	public Pit getNextPit(Pit current) {
 		int nextOwner = current.getOwner();
 		int nextIndex = current.getIndex();

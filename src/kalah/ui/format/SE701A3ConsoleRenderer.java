@@ -57,6 +57,12 @@ public class SE701A3ConsoleRenderer implements ConsoleRenderer {
 		return "Game over";
 	}
 
+	/*
+	 * WARNING: HIC SUNT DRACONES!!!!!!!!
+	 * I tried a 2D character grid renderer but certain rules had waaaaay too many exceptions.
+	 * These functions would actually be readable if it had in-lined constants rather than using the theme class.
+	 */
+	
 	private String horizontalBorder(int numHouses) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(theme.getCorner());
@@ -72,6 +78,7 @@ public class SE701A3ConsoleRenderer implements ConsoleRenderer {
 		return sb.toString();
 	}
 
+	//Should really parameterise this to reduce duplication, see lowerLine()
 	private String upperLine(int numHousesAcross, Board board) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(theme.getVBorder());

@@ -20,6 +20,9 @@ public class Kalah {
 		new Kalah().play(new MockIO());
 	}
 
+	/*
+	 *	Basically, instantiate a RuleSet and Interface for a GameEngine to use against a Board.  
+	 */
 	public void play(IO io) {
 		Board board = new Board(2, 6, 4);
 		QualitasIOUserInterface ui = new QualitasIOUserInterface(io, new SE701A3ConsoleRenderer(new SE701A3GridTheme()));
