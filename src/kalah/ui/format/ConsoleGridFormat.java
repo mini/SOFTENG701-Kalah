@@ -75,7 +75,7 @@ public class ConsoleGridFormat implements ConsoleFormat {
 	private String upperLine(int numHousesAcross, Board board) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(theme.getVBorder());
-		sb.append(StringUtils.center(theme.getPlayerLabel(PLAYER2), theme.getStoreCellWidth(), theme.getSpacer()));
+		sb.append(StringUtils.center(theme.getStoreCellPlayerLabel(PLAYER2), theme.getStoreCellWidth(), theme.getSpacer()));
 		for (int i = 0; i < numHousesAcross; i++) {
 			sb.append(theme.getVBorder());
 			sb.append(StringUtils.center(
@@ -114,7 +114,7 @@ public class ConsoleGridFormat implements ConsoleFormat {
 			sb.append(StringUtils.center(theme.getHouseCellContent(i, board.getPlayerHouse(PLAYER1, i).getNumSeeds()), theme.getHouseCellWidth(), theme.getSpacer()));
 		}
 		sb.append(theme.getVBorder());
-		sb.append(StringUtils.center(theme.getPlayerLabel(PLAYER1), theme.getStoreCellWidth(), theme.getSpacer()));
+		sb.append(StringUtils.center(theme.getStoreCellPlayerLabel(PLAYER1), theme.getStoreCellWidth(), theme.getSpacer()));
 		sb.append(theme.getVBorder());
 		return sb.toString();
 	}

@@ -16,7 +16,7 @@ public interface GridTheme {
 
 	public String getHouseCellContent(int houseNum, int numSeeds);
 
-	public String getPlayerLabel(int playerNum);
+	public String getStoreCellPlayerLabel(int playerNum);
 
 	public String getSeedCount(int numSeeds);
 }

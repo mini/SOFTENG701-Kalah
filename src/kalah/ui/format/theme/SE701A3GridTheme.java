@@ -39,7 +39,7 @@ public class SE701A3GridTheme implements GridTheme {
 	}
 
 	@Override
-	public String getPlayerLabel(int playerNum) {
+	public String getStoreCellPlayerLabel(int playerNum) {
 		return "P" + playerNum;
 	}
 

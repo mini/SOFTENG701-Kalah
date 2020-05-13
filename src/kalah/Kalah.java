@@ -21,12 +21,9 @@ public class Kalah {
 	}
 
 	public void play(IO io) {
-		Board b = new Board(2, 6, 4);
+		Board board = new Board(2, 6, 4);
 		QualitasIOUserInterface ui = new QualitasIOUserInterface(io, new ConsoleGridFormat(new SE701A3GridTheme()));
 		RuleSet rs = new StandardKalahRuleSet();
-		
-		
-		
-		new GameEngine(rs, ui).runGameLoop(b);
+		new GameEngine(rs, ui).runGameLoop(board);
 	}
 }

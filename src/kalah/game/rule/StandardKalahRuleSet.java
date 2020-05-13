@@ -20,7 +20,7 @@ public class StandardKalahRuleSet implements RuleSet {
 	public int processTurn(Board board, int playerNum, int selectedHouse) {
 		House house = board.getPlayerHouse(playerNum, selectedHouse);
 		if (house.isEmpty()) {
-			throw new EmptyHouseKalahException("House is empty");
+			throw new EmptyHouseKalahException();
 		}
 
 		int seedsToSow = house.takeAllSeeds();
@@ -44,7 +44,6 @@ public class StandardKalahRuleSet implements RuleSet {
 					playerStore.sowSeeds(oppositeHouse.takeAllSeeds());
 					playerStore.sowSeeds(((House) pit).takeAllSeeds());
 				}
-
 			}
 		}
 
@@ -66,5 +65,4 @@ public class StandardKalahRuleSet implements RuleSet {
 		}
 		return true;
 	}
-
 }
