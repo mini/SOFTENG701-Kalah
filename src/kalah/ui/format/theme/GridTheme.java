@@ -1,10 +1,6 @@
 package kalah.ui.format.theme;
 
 public interface GridTheme {
-
-	public int getStoreCellWidth();
-	
-	public int getHouseCellWidth();
 	
 	public String getSpacer();
 	

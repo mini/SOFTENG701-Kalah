@@ -2,17 +2,7 @@ package kalah.ui.format.theme;
 
 import kalah.util.StringUtils;
 
-public class SE701A3GridTheme implements GridTheme {
-	@Override
-	public int getStoreCellWidth() {
-		return 4;
-	}
-
-	@Override
-	public int getHouseCellWidth() {
-		return 7;
-	}
-
+public class SE701GridTheme implements GridTheme {
 	@Override
 	public String getSpacer() {
 		return " ";
