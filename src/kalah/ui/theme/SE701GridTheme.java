@@ -1,4 +1,4 @@
-package kalah.ui.format.theme;
+package kalah.ui.theme;
 
 import kalah.util.StringUtils;
 

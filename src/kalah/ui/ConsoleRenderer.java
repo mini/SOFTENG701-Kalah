@@ -1,4 +1,4 @@
-package kalah.ui.format;
+package kalah.ui;
 
 import kalah.game.model.Board;
 

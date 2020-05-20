@@ -1,48 +1,53 @@
-package kalah.ui;
+package kalah.game.player;
 
 import com.qualitascorpus.testsupport.IO;
 
 import kalah.game.GameEngine;
 import kalah.game.model.Board;
-import kalah.ui.format.ConsoleRenderer;
+import kalah.ui.ConsoleRenderer;
 
-public class QualitasIOUserInterface implements UserInterface {
+public class QualitasIOPlayer implements Player {
 	private static final String QUIT_GAME_TOKEN = "q";
 	private static final int REQUIRED_PLAYERS = 2;
 
 	private IO io;
-	private ConsoleRenderer cf;
+	private ConsoleRenderer cr;
 
-	public QualitasIOUserInterface(IO io, ConsoleRenderer cf) {
+	public QualitasIOPlayer(IO io, ConsoleRenderer cr) {
 		this.io = io;
-		this.cf = cf;
+		this.cr = cr;
 	}
 
 	@Override
 	public boolean boardCompatibilityCheck(Board board) {
 		return board.getNumPlayers() == REQUIRED_PLAYERS;
 	}
+	
+	@Override
+	public PlayerType getPlayerType() {
+		return PlayerType.LOCAL;
+	}
 
 	@Override
 	public void renderBoard(Board board) {
-		for (String line : cf.getBoardRepresentation(board)) {
+		for (String line : cr.getBoardRepresentation(board)) {
 			io.println(line);
 		}
 	}
 
 	@Override
 	public int getInput(Board board, int playerNum) {
-		return io.readInteger(cf.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), GameEngine.QUIT_VALUE, QUIT_GAME_TOKEN);
+		return io.readInteger(cr.getPlayerInputPrompt(playerNum, QUIT_GAME_TOKEN), 1, board.getHousesPerPlayer(), GameEngine.QUIT_VALUE, QUIT_GAME_TOKEN);
 	}
 
 	@Override
 	public void onEmptyHouse() {
-		io.println(cf.getEmptyHouseMsg());
+		io.println(cr.getEmptyHouseMsg());
 	}
 
 	@Override
 	public void onQuit(Board board) {
-		io.println(cf.getGameOverMsg());
+		io.println(cr.getGameOverMsg());
 		renderBoard(board);
 	}
 
@@ -51,14 +56,14 @@ public class QualitasIOUserInterface implements UserInterface {
 		renderBoard(board);
 		onQuit(board);
 		for (int i = 1; i <= board.getNumPlayers(); i++) {
-			io.println(cf.getScoreMsg(i, board.getPlayerScore(i)));
+			io.println(cr.getScoreMsg(i, board.getPlayerScore(i)));
 		}
 
 		int winner = board.getCurrentFirstPlace();
 		if (winner == Board.NO_WINNER) {
-			io.println(cf.getTieMsg());
+			io.println(cr.getTieMsg());
 		} else {
-			io.println(cf.getWinMsg(winner));
+			io.println(cr.getWinMsg(winner));
 		}
 	}
 }

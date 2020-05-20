@@ -3,47 +3,62 @@ package kalah.game;
 import kalah.exception.EmptyHouseKalahException;
 import kalah.exception.IncompatibleBoardKalahException;
 import kalah.game.model.Board;
+import kalah.game.player.Player;
+import kalah.game.player.Player.PlayerType;
 import kalah.game.rule.RuleSet;
-import kalah.ui.UserInterface;
 
 public class GameEngine {
 	public static final int QUIT_VALUE = 0;
 
 	private RuleSet ruleset;
-	private UserInterface ui;
+	private Player[] players;
 
-	public GameEngine(RuleSet ruleset, UserInterface ui) {
+	public GameEngine(RuleSet ruleset, Player... players) {
 		this.ruleset = ruleset;
-		this.ui = ui;
+		this.players = players;
 	}
 
 	public void runGameLoop(Board board) {
-		if(!ruleset.boardCompatibilityCheck(board)) {
+		if (!ruleset.boardCompatibilityCheck(board)) {
 			throw new IncompatibleBoardKalahException("RuleSet is not compatible with current board");
-		} else if(!ui.boardCompatibilityCheck(board)) {
-			throw new IncompatibleBoardKalahException("UI is not compatible with current board");
 		}
-		
-		int currentPlayer = ruleset.getFirstPlayer();
+		for (Player p : players) {
+			if (!p.boardCompatibilityCheck(board)) {
+				throw new IncompatibleBoardKalahException("UI is not compatible with current board");
+			}
+		}
+
+		int player = ruleset.getFirstPlayer();
 		boolean endedNaturally = true;
-		while (!ruleset.checkGameOver(board, currentPlayer)) {
+		while (!ruleset.checkGameOver(board, player)) {
 			try {
-				ui.renderBoard(board);
-				int response = ui.getInput(board, currentPlayer);
+				players[player - 1].renderBoard(board);
+				int response = players[player - 1].getInput(board, player);
 				if (response == QUIT_VALUE) {
 					endedNaturally = false;
 					break;
 				}
-				currentPlayer = ruleset.processTurn(board, currentPlayer, response);
+				player = ruleset.processTurn(board, player, response);
 			} catch (EmptyHouseKalahException e) {
-				ui.onEmptyHouse();
+				players[player - 1].onEmptyHouse();
 			}
 		}
 
-		if (endedNaturally) {
-			ui.onGameOver(board);
-		} else {
-			ui.onQuit(board);
+		// Send event to all remote players but only first local
+		boolean seenLocalPlayer = false;
+		for (Player p : players) {
+			if (p.getPlayerType() == PlayerType.LOCAL) {
+				if (seenLocalPlayer) {
+					continue;
+				}
+				seenLocalPlayer = true;
+			}
+
+			if (endedNaturally) {
+				p.onGameOver(board);
+			} else {
+				p.onQuit(board);
+			}
 		}
 	}
 }

@@ -5,11 +5,12 @@ import com.qualitascorpus.testsupport.MockIO;
 
 import kalah.game.GameEngine;
 import kalah.game.model.Board;
+import kalah.game.player.Player;
+import kalah.game.player.QualitasIOPlayer;
 import kalah.game.rule.RuleSet;
 import kalah.game.rule.StandardKalahRuleSet;
-import kalah.ui.QualitasIOUserInterface;
-import kalah.ui.format.SE701A4ConsoleRenderer;
-import kalah.ui.format.theme.SE701GridTheme;
+import kalah.ui.SE701A4ConsoleRenderer;
+import kalah.ui.theme.SE701GridTheme;
 
 /**
  * This class is the starting point for a Kalah implementation using the test
@@ -21,12 +22,15 @@ public class Kalah {
 	}
 
 	/*
-	 *	Basically, instantiate a RuleSet and Interface for a GameEngine to use against a Board.  
+	 * Basically, instantiate a RuleSet and Interface for a GameEngine to use
+	 * against a Board.
 	 */
 	public void play(IO io) {
 		Board board = new Board(2, 6, 4);
-		QualitasIOUserInterface ui = new QualitasIOUserInterface(io, new SE701A4ConsoleRenderer(new SE701GridTheme()));
+		SE701A4ConsoleRenderer renderer = new SE701A4ConsoleRenderer(new SE701GridTheme());
+		Player p1 = new QualitasIOPlayer(io, renderer);
+		Player p2 = new QualitasIOPlayer(io, renderer);
 		RuleSet rs = new StandardKalahRuleSet();
-		new GameEngine(rs, ui).runGameLoop(board);
+		new GameEngine(rs, p1, p2).runGameLoop(board);
 	}
 }

@@ -1,13 +1,15 @@
-package kalah.ui;
+package kalah.game.player;
 
 import kalah.game.model.Board;
 
-public interface UserInterface {
+public interface Player {
 
 	/**
 	 * Return true if the board can be fully interacted with by this user interface implementation. 
 	 */
 	public boolean boardCompatibilityCheck(Board board);
+	
+	public PlayerType getPlayerType();
 
 	public void renderBoard(Board board);
 
@@ -19,4 +21,8 @@ public interface UserInterface {
 
 	public void onGameOver(Board board);
 
+	public enum PlayerType {
+		LOCAL, REMOTE, CPU;
+	}
+	
 }

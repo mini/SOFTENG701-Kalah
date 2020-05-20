@@ -1,10 +1,10 @@
-package kalah.ui.format;
+package kalah.ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kalah.game.model.Board;
-import kalah.ui.format.theme.GridTheme;
+import kalah.ui.theme.GridTheme;
 import kalah.util.StringUtils;
 
 public class SE701A4ConsoleRenderer extends SE701A3ConsoleRenderer {

@@ -1,7 +1,7 @@
-package kalah.ui.format;
+package kalah.ui;
 
 import kalah.game.model.Board;
-import kalah.ui.format.theme.GridTheme;
+import kalah.ui.theme.GridTheme;
 import kalah.util.StringUtils;
 
 public class SE701A3ConsoleRenderer implements ConsoleRenderer {
