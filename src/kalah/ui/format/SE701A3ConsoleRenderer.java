@@ -5,13 +5,13 @@ import kalah.ui.format.theme.GridTheme;
 import kalah.util.StringUtils;
 
 public class SE701A3ConsoleRenderer implements ConsoleRenderer {
-	private static final int PLAYER1 = 1;
-	private static final int PLAYER2 = 2;
-	
+	protected static final int PLAYER1 = 1;
+	protected static final int PLAYER2 = 2;
+
 	private static final int STORE_CELL_WIDTH = 4;
 	private static final int HOUSE_CELL_WIDTH = 7;
 
-	private GridTheme theme;
+	protected GridTheme theme;
 
 	public SE701A3ConsoleRenderer(GridTheme theme) {
 		this.theme = theme;
@@ -64,7 +64,7 @@ public class SE701A3ConsoleRenderer implements ConsoleRenderer {
 	 * WARNING: HIC SUNT DRACONES!!!!!!!!
 	 * I tried a 2D character grid renderer but certain rules had waaaaay too many exceptions.
 	 */
-	
+
 	private String horizontalBorder(int numHouses) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(theme.getCorner());
@@ -80,7 +80,7 @@ public class SE701A3ConsoleRenderer implements ConsoleRenderer {
 		return sb.toString();
 	}
 
-	//Should really parameterise this to reduce duplication, see lowerLine()
+	// Should really parameterise this to reduce duplication, see lowerLine()
 	private String upperLine(int numHousesAcross, Board board) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(theme.getVBorder());
