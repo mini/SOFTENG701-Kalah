@@ -116,8 +116,12 @@ public class Board {
 	
 	public Pit getNextPitForOwner(Pit current, int distance) {
 		Pit pit = current;
+		int playerNum = current.getOwner();
 		for(int i = 0; i < distance; i++) {
 			pit = getNextPit(pit);
+			if(pit instanceof Store && pit.getOwner() != playerNum) {
+				i--;
+			}
 		}
 		return pit;
 	}

@@ -81,15 +81,10 @@ public class QualitasIOAIPlayer extends Player {
 	private int checkCapture(Board board, int playerNum) {
 		for (int i = 1; i <= board.getHousesPerPlayer(); i++) {
 			House house = board.getPlayerHouse(playerNum, i);
-
 			Pit endHouse = board.getNextPitForOwner(house, house.getNumSeeds());
-			if (i == 6) {
-				System.out.println("00---000-0--0" + house);
-				System.out.println("00---000-0--0" + endHouse);
-			}
 			if (!house.isEmpty() && endHouse instanceof House && endHouse.getOwner() == playerNum && endHouse.isEmpty()) {
 				House opposite = getOppositeHouse(board, (House) endHouse);
-				if (!opposite.isEmpty()) {
+				if (!opposite.isEmpty() || house.getNumSeeds() >= board.getPitsPerPlayer()) {
 					return i;
 				}
 			}
@@ -109,6 +104,6 @@ public class QualitasIOAIPlayer extends Player {
 				return i;
 			}
 		}
-		return 0; // Will never happen, due to gameover check
+		return 0;
 	}
 }
