@@ -6,7 +6,7 @@ import kalah.game.GameEngine;
 import kalah.game.model.Board;
 import kalah.ui.ConsoleRenderer;
 
-public class QualitasIOPlayer implements Player {
+public class QualitasIOPlayer extends Player {
 	private static final String QUIT_GAME_TOKEN = "q";
 	private static final int REQUIRED_PLAYERS = 2;
 

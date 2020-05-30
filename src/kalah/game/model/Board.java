@@ -72,6 +72,10 @@ public class Board {
 	public int getHousesPerPlayer() {
 		return housesPerPlayer;
 	}
+	
+	public int getPitsPerPlayer() {
+		return pitsPerPlayer;
+	}
 
 	public Store getPlayerStore(int playerNum) {
 		return (Store) playersPits.get(playerNum - 1).get(housesPerPlayer);
@@ -108,5 +112,13 @@ public class Board {
 		}
 
 		return playersPits.get(nextOwner - 1).get(nextIndex - 1);
+	}
+	
+	public Pit getNextPitForOwner(Pit current, int distance) {
+		Pit pit = current;
+		for(int i = 0; i < distance; i++) {
+			pit = getNextPit(pit);
+		}
+		return pit;
 	}
 }
